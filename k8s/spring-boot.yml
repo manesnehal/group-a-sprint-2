@@ -2,9 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: group-a-munity
-  namespace: default
 spec:
-  replicas: 1
   selector:
     matchLabels:
       app: group-a-munity
@@ -16,20 +14,20 @@ spec:
     spec:
       containers:
       - name: group-a-munity
+        image: gcr.io/cg-gcp-jee-pt-09-07-22-160/group-a-munity:v1
         env:
           - name: POSTGRES_USER
             valueFrom:
               configMapKeyRef:
-                name: postgres-config
-                key: postgres_user
+                name: postgres-configmap
+                key: POSTGRES_USER
           - name: POSTGRES_PASSWORD
             valueFrom:
               configMapKeyRef:
-                name: postgres-config
-                key: postgres_password
-          - name: POSTGRES_HOST
+                name: postgres-configmap
+                key: POSTGRES_PASSWORD
+          - name: POSTGRES_DB
             valueFrom:
               configMapKeyRef:
-                name: hostname-config
-                key: postgres_host
-        image: gcr.io/cg-gcp-jee-pt-09-07-22-160/group-a-munity:v1
+                name: postgres-configmap
+                key: POSTGRES_DB

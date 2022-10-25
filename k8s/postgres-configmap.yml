@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgres-configmap
+data:
+  POSTGRES_USER: munity
+  POSTGRES_PASSWORD: password
+  POSTGRES_DB: munity_db
